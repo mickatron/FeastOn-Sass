@@ -44,13 +44,13 @@ gulp.task('release', callback => runSequence(
     }
     callback(error);
   } // eslint-disable-line comma-dangle
-  // TODO: revise the above dsiabled line.
+  // TODO: revise the above disabled line.
 ));
 
 gulp.task('bump-version', () => {
   const type = gutil.env.type || 'patch';
   console.log('Release patch type: ', type); // eslint-disable-line no-console
-  // We hardcode the version change type to 'patch' but it may be a good idea to
+  // We hard code the version change type to 'patch' but it may be a good idea to
   // use minimist (https://www.npmjs.com/package/minimist) to determine with a
   // command argument whether you are doing a 'major', 'minor' or a 'patch' change.
   return gulp.src(['./package.json'])

@@ -13,7 +13,7 @@ Install with `npm` or `yarn`.
   `npm i FeastOn-SASS`
 
 ## Getting Started 
-Running the below command will copy all customisable stylesheets to a folder of your choosing. 
+Running the below command will copy all customizable style sheets to a folder of your choosing. 
 
   `FeastOnSass -f /destination/folder`
 
