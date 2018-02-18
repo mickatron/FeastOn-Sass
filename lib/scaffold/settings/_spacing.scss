@@ -1,0 +1,29 @@
+// 	Spacing Scale Values
+// -------------------------------------------- \\
+
+$spacing-scales: (
+  default: (
+    breakpoint: 0,
+    base-size: (map-get($base, font-size) * map-get($base, line-height) ), // the line-height in px units.
+      ratio: 2
+  ),
+ );
+
+//     SPACING SCALES
+// -------------------------------------------- \\
+$_default-spacing-size: map-get(map-get($spacing-scales, default), base-size);
+$_base-font-size: map-get($base, font-size);
+
+$spacing-giga:    modular-rhythm(6, default, $spacing-scales, $_default-spacing-size);
+$spacing-mega:    modular-rhythm(5, default, $spacing-scales, $_default-spacing-size);
+$spacing-kilo:    modular-rhythm(4, default, $spacing-scales, $_default-spacing-size);
+$spacing-alpha:   modular-rhythm(3, default, $spacing-scales, $_default-spacing-size);
+$spacing-beta:    modular-rhythm(2, default, $spacing-scales, $_default-spacing-size);
+$spacing-gamma:   modular-rhythm(1, default, $spacing-scales, $_default-spacing-size);
+$spacing-delta:   px-to-rem($default-spacing-size, $_base-font-size) ;
+$spacing-epsilon: modular-rhythm(-1, default, $spacing-scales, $_default-spacing-size);
+$spacing-zeta:    modular-rhythm(-2, default, $spacing-scales, $_default-spacing-size);
+$spacing-milli:   modular-rhythm(-3, default, $spacing-scales, $_default-spacing-size);
+$spacing-micro:   modular-rhythm(-4, default, $spacing-scales, $_default-spacing-size);
+
+//$base-spacing-unit: $spacing-delta;

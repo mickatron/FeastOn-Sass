@@ -1,0 +1,183 @@
+
+
+//	LAYOUT ELEMENTS
+// -------------------------------------------- \\
+
+.l-block {
+  &__inner {
+    @extend %block__inner;
+  }
+}
+
+.l-corset {
+  @extend %l-corset;
+
+  &-block {
+    @extend %l-corset;
+
+    &__inner {
+      @extend %l-block__inner;
+    }
+  }
+}
+
+
+// 	TABLES
+// -------------------------------------------- \\
+
+table { 
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  text-align: left;
+  font-weight: 400;
+}
+
+td,
+th {
+  padding: $spacing-epsilon;
+}
+
+
+// 	CSS TABLES
+// -------------------------------------------- \\
+.l-table {
+  display: table;
+  border-collapse: separate;
+  margin: $spacing-delta 0;
+}
+
+.l-tr {
+  display: table-row;
+}
+
+.l-td {
+  display: table-cell;
+}
+
+.l-columns {
+  &--2 {
+    columns: 2;
+  }
+
+  &--3 {
+    columns: 3;
+  }
+
+  &--4 {
+    columns: 4;
+  }
+
+  &--5 {
+    columns: 5;
+  }
+}
+
+
+.l-one-sixteenth {
+  @include grid-cell(1/16); 
+}
+
+.l-one-eighth {
+  @include grid-cell(1/8); 
+}
+
+.l-one-sixth {
+  @include grid-cell(1/6); // 16.6666%
+}
+
+.l-one-fifth {
+  @include grid-cell(1/5); // 25%
+}
+
+.l-one-quarter, 
+.l-two-eighths {
+  @include grid-cell(1/4); // 25%
+}
+
+.l-three-eighths {
+  @include grid-cell(3/8); 
+}
+
+.l-one-third,
+.l-two-sixths {
+  @include grid-cell(1/3); // 33.3333%
+}
+
+.l-two-fifths {
+  @include grid-cell(2/5); // 40%
+}
+
+.l-one-halve,
+.l-one-half, 
+.l-three-sixths, 
+.l-four-eighths {
+  @include grid-cell(1/2); // 50%
+}
+
+.l-three-fifths {
+  @include grid-cell(3/5); // 60%
+}
+
+.l-five-eighths {
+  @include grid-cell(5/8);
+}
+
+.l-two-thirds, 
+.l-four-sixths {
+  @include grid-cell(2/3); // 66.6666%
+}
+
+.l-three-quarters, 
+.l-six-eighths {
+  @include grid-cell(3/4); // 75%
+}
+
+.l-four-fifths {
+  @include grid-cell(4/5); // 80&
+}	
+
+.l-five-sixths {
+  @include grid-cell(5/6); // 83.3333%
+  //width: 83.3333% - $base-grid-gutter-half;
+}	
+
+.l-seven-eighths {
+  @include grid-cell(7/8);
+}
+
+// Sevenths
+.l-one-seventh {
+  @include grid-cell(1/7); // 16.6666%
+}
+
+.l-two-sevenths {
+  @include grid-cell(2/7); // 16.6666%
+}
+
+.l-three-sevenths {
+  @include grid-cell(3/7); // 16.6666%
+}
+
+.l-four-sevenths {
+  @include grid-cell(4/7); // 16.6666%
+}
+
+.l-five-sevenths {
+  @include grid-cell(5/7); // 16.6666%
+}
+
+.l-six-sevenths {
+  @include grid-cell(5/7); // 16.6666%
+}
+
+.l-one-whole {
+  width: 100%;
+}
+
+
+
+
+

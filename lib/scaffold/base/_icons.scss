@@ -1,0 +1,74 @@
+.i-link {
+  position: relative;
+  padding-left: $spacing-delta + $spacing-zeta;
+
+  svg,
+  [type='image/svg+xml']  {
+    @include pos-v-center;
+    display: inline;
+    position: absolute;
+    fill: map-get($base, link-color);
+    left: 0;
+  }
+
+  // TODO: make this and the respective <a> styles in typography more DRY
+  &:hover {
+    color: get-color(base, alpha, light, map-get($base, shade)); //light
+  }
+
+  &:active {
+    color: get-color(base, alpha, dark, map-get($base, shade)); //dark
+  } 
+}
+
+.i-menu {
+  @include i-menu;
+}
+
+
+.i-chevron--up {
+  @include i-chevron(-45deg, 1rem);
+}
+
+.i-chevron--down {
+  @include i-chevron(135deg, 1rem);
+
+}
+
+.i-chevron--right {
+  @include i-chevron(45deg, 1rem);
+}
+
+.i-chevron--left {
+  @include i-chevron(225deg, 1rem);
+
+}
+
+.i-info {
+  font-family: $serif-stack;
+  font-style: italic;
+}
+
+.i-exclaim {
+  font-family: $serif-stack;
+}
+
+.i-circle {
+  &--border {
+    //border-width: 2px;
+    display: inline-block;
+    position: relative;
+    border: map-get($base, border-style);
+    border-radius: 100000px;
+    padding: $spacing-zeta;
+    width: $spacing-delta + $spacing-zeta;
+    height: $spacing-delta + $spacing-zeta;
+
+    svg,
+    span {
+      @include pos-center;
+      position: absolute;
+      line-height: 0;
+    }
+  }
+}

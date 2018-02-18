@@ -1,0 +1,82 @@
+
+// 	Base Button Configuration
+// -------------------------------------------- \\
+$base-button-radius: 2px;
+
+// BASE BUTTON STYLES
+$_alpha-dark: get-color(alpha, null, dark, map-get($base, shade));
+$base-button: (
+  border: solid $_alpha-dark,
+  border-width: 1px 1px 3px 1px,
+  background: get-color(alpha),
+  color: get-color(white),
+  hover: (
+    background: $_alpha-dark,
+  ),
+  active: (
+    border: solid get-color(alpha),
+    border-width: 1px 1px 3px 1px,
+    background: get-color(alpha),
+  )
+);
+
+// DISABLED BUTTON STYLE
+$disabled-bg-color: get-color(grey, null, light,  map-get($base, shade));
+$disabled-button: (
+  border: solid $disabled-bg-color,
+  border-width: 1px 1px 3px 1px,
+  background: $disabled-bg-color,
+  color: get-color(white),
+  hover: (
+    background: $disabled-bg-color,
+  ),
+  active: (
+    background: $disabled-bg-color,
+  )
+);
+
+// TRUTHY BUTTON STYLE
+$_truthy-dark: get-color(truthy, null, dark, map-get($base, shade));
+$truthy-button: (
+  border: solid $_truthy-dark,
+  border-width: 1px 1px 3px 1px,
+  background: get-color(truthy),
+  hover: (
+    background: $_truthy-dark,
+  ),
+  active: (
+    border: solid get-color(truthy),
+    border-width: 1px 1px 3px 1px,
+    background: get-color(truthy),
+  )
+);
+// WARNING BUTTON STYLE
+$_warn-dark: get-color(warn, null, dark, map-get($base, shade));
+$warn-button: (
+  border: solid $_warn-dark,
+  border-width: 1px 1px 3px 1px,
+  background: get-color(warn),
+  hover: (
+    background: $_warn-dark,
+  ),
+  active: (
+    border: solid get-color(warn),
+    border-width: 1px 1px 3px 1px,
+    background: get-color(warn),
+  )
+);
+// FALSE BUTTON STYLE
+$_falsey-dark: get-color(falsey, null, dark, map-get($base, shade));
+$falsey-button: (
+  border: solid $_falsey-dark,
+  border-width: 1px 1px 3px 1px,
+  background: get-color(falsey),
+  hover: (
+    background: $_falsey-dark,
+  ),
+  active: (
+    border: solid get-color(falsey),
+    border-width: 1px 1px 3px 1px,
+    background: get-color(falsey),
+  )
+);

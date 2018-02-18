@@ -1,0 +1,63 @@
+/// Scale labels
+/// @group Rhythm
+$scale-labels: (micro, milli, zeta, epsilon, delta, gamma, beta, alpha, kilo, mega, giga);
+
+/// Base scale label
+/// @group Rhythm
+$base-scale-index: index($scale-labels, delta);
+
+/// Rythmic scale ratios.
+$scales: (
+  minorSecond: 1.067,
+  majorSecond: 1.125,
+  minorThird: 1.2,
+  majorThird: 1.25,
+  fourth: 1.333,
+  augmentedFourth: 1.414,
+  fifth: 1.5,
+  minorSixth: 1.6,
+  majorSixth: 1.667,
+  minorSeventh: 1.778,
+  golden: 1.618,
+  octave: 2, // exponential
+  majorTenth: 2.5,
+  majorEleventh: 2.667,
+  majorTwelfth: 3,
+  doubleOctave: 4
+);
+
+/// Calculates modular rythmic values and returns them as rem values
+/// @group Rhythm
+/// @param  {number} $scale-step  
+/// @param  {string} $size-label  Desired spacing scale to use. Defined in settings/spacing.
+/// @param  {map} $responsive-scale-list The responsive spacing scale map. Defined in settings/spacing.
+/// @param  {px} $base-size  [16px] Your documents base font size
+/// @param  {string} $px-or-rem  [rem] Desired return value. Values `px` and `rem` supported.
+/// @return {rem}                      
+@function modular-rhythm($scale-value, $size-label, $scale-list, $base-size: 16px, $px-or-rem: rem) {
+  $scale: map-get(map-get($scale-list, $size-label), ratio);
+  $fs: 0;
+  // font-size calculation
+  @if $scale-value < 0 {
+    // low scale
+    $fs: ms-low-scale($scale, $scale-value, $base-size); 
+  } @else { 
+    // high scale 
+    $fs: ms-high-scale($scale, $scale-value, $base-size); 
+  }
+
+  @if $px-or-rem == px {
+    @return $fs;
+  } @else if  $px-or-rem == rem {
+    @return px-to-rem($fs, $base-size);
+
+  }
+}
+
+@function ms-low-scale ($scale, $scale-value, $base-size) {
+  @return $base-size / pow($scale, -$scale-value);
+}
+
+@function ms-high-scale($scale, $scale-size, $base-size) {
+  @return pow($scale, $scale-size) * $base-size;
+}

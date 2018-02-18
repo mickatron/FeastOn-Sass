@@ -1,0 +1,49 @@
+// TODO: generic styles for Stacked & Grid layout forms
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+label { 
+  display: inline-block;
+  margin: $spacing-epsilon 0;
+  padding: 0;
+  width: 100%;
+
+  p {
+    margin: $spacing-zeta 0;
+  }
+}
+
+input, 
+textarea, 
+select {		
+  @include font-size(delta);
+  display: block;
+  font-family: $sans-stack;
+  background: get-color(base, white); 
+  border: 1px solid get-color(base, grey, light, map-get($base, shade)*3); //, light-x3
+  border-radius: 1px;
+  color: map-get($base, font-color);
+  padding: $spacing-epsilon;
+  width: 100%;
+
+  &:focus {
+    border-color: get-color(info);
+    background-color: get-color(info, null, light, map-get($base, shade)*2);
+  }
+}
+
+input {
+  &[type='radio'],
+  &[type='checkbox'] {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+textarea {
+  width: 100%;
+}

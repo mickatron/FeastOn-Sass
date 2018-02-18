@@ -1,0 +1,32 @@
+{
+  "name": "feast-on-sass",
+  "version": "0.0.1",
+  "description": "A small SASS Libarry.",
+  "main": "index.js",
+  "author": "Michael Hargreaves",
+  "license": "MIT",
+  "dependencies": {
+    "breakpoint-sass": "^2.7.1",
+    "minimist": "^1.2.0",
+    "ncp": "^2.0.0"
+  },
+  "devDependencies": {
+    "del": "^2.2.2",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "gulp": "^3.9.1",
+    "gulp-bump": "^2.7.0",
+    "gulp-git": "^2.1.0",
+    "gulp-util": "^3.0.8",
+    "run-sequence": "^1.2.2",
+    "sass-lint": "^1.12.1",
+    "sassdoc": "^2.5.0"
+  },
+  "bin": {
+    "FeastOnSass-scaffold": "bin/scaffold-project.js"
+  },
+  "scripts": {
+    "dev:airbnb:peerdeps": "install-peerdeps --dev eslint-config-airbnb-base"
+  }
+}

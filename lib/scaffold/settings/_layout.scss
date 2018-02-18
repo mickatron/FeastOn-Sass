@@ -1,0 +1,24 @@
+%l-corset { 
+  margin-left: auto;
+  margin-right: auto;
+
+  @include breakpoint($mobile-start) {
+    max-width: $mobile-start;
+  }
+  @include breakpoint($tablet-start) {
+    max-width: $tablet-start;
+  }
+  @include breakpoint($desktop-start) {
+    max-width: $desktop-start;
+  }
+  @include breakpoint($desktop-wide-start) {
+    max-width: $desktop-wide-start;
+  }
+  @include breakpoint($desktop-high-res-start) {
+    max-width: $desktop-high-res-start;
+  }
+}
+
+%l-block__inner {
+  @include responsive-gutters;
+}

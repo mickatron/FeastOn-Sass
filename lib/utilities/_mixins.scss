@@ -1,0 +1,312 @@
+////
+/// @author Michael Hargreaves
+////
+
+//  Responsive $responsive-settings Utils
+// -------------------------------------------- \\
+
+/// Creates responsively styled gutters according to the 
+/// @param  {Map Value} $type:gutter   Defaults to 'gutter' property. This property is found on the $map parmameter and may be any other valid property on that map which requires responsive gutters.
+/// @param  {Map} $map:$responsive-settings A map of site settings.
+/// @group Responsive
+@mixin responsive-gutters($type: gutter, $map: $responsive-settings, $list: (false, true, false, true)) {
+  @each $key, $value in $map {
+    $bp-value: map-get(map-get($map, $key), breakpoint);
+    $gutter-value: map-get(map-get($map, $key), $type);
+
+    @include breakpoint($bp-value) {
+      @if nth($list, 1) { margin-top: $gutter-value; }
+      @if nth($list, 2) { margin-right: $gutter-value; }
+      @if nth($list, 3) { margin-bottom: $gutter-value; }
+      @if nth($list, 4) { margin-left: $gutter-value;}
+    }
+  }
+}
+
+//  RESPONSIVE FONT-SIZE MIXIN
+// -------------------------------------------- \\
+
+/// Sets the font size accoring to the modular scale settings and responsive settings of the site.
+/// @param  {[type]} $size                The scale step increment. 
+/// @param  {[type]} $map:$responsive-settings A map of site settings.
+/// @group Responsive
+@mixin font-size($size, $map: $responsive-settings) {
+  $scale-value: index($scale-labels, $size) - $base-scale-index;
+  //$base-size:'';
+  @each $key, $value in $map {
+    $bp-value: map-get($value, breakpoint);
+    
+    // $this-base-size : map-get($value, base-size);
+    // @if $this-base-size {
+    //   $base-size: $this-base-size;
+    // }
+
+    @include breakpoint($bp-value) {
+      $size: modular-rhythm($scale-value, $key, $map);
+      @if $size != '' {
+        font-size: $size;
+      }
+    }
+  }
+}
+
+//  GRIDS MIXIN
+// -------------------------------------------- \\
+
+/// Calculates style attributes for a grid cell.
+/// @group Grid
+/// @param  {fraction} $width             The width of the cell in fraction format
+/// @param  {CSS sizing} $margin-gutter    The cells gutter size, if using margins for gutters.
+@mixin grid-cell($width, $margin-gutter: 0, $cycle: 0) {
+  $column-width: (100% * $width);
+  @if $margin-gutter == 0 {
+    width: $column-width;
+  } @else {
+    width: calc(#{$column-width} - #{$margin-gutter * 2});
+  }
+}
+
+//   Gradients
+// -------------------------------------------- \\
+
+/// Creates a linear gradient.
+/// @param  {integer} $direction The direction of the gradient in degrees.
+/// @param  {rgb|rgba|hex...} $colors... A series of colors to render along the gradient.
+/// @group Colour, Shape &amp; Effects
+@mixin linear-gradient(
+  $direction, 
+  $colors...) {
+  
+  $w3c: '';
+
+  @if type-of($direction) == number and $direction < 0 {
+    $w3c: 180 + $direction;
+  } @else {
+    $w3c: $direction;
+  }
+
+  @if type-of($direction) != number {
+    $direction: _fix-direction($direction);
+  }
+
+  // background-image:  -webkit-linear-gradient($direction, $colors);
+  background-image:          linear-gradient($w3c, $colors);
+}
+
+/// Creates a radial gradient.
+/// @param  {integer} $direction The direction of the gradient in degrees.
+/// @param  {rgb|rgba|hex...} $colors... A series of colors to render along the gradient.
+/// @group Colour, Shape &amp; Effects
+@mixin radial-gradient($direction, $colors...) {
+    
+  $webkit-direction: ();
+  $at-index: false;
+  
+  // reordering for older browsers
+  @if length($direction) > 1 {
+    $at-index: index($direction, 'at');
+    @if $at-index == null {
+      $at-index: false;
+    }
+  }   
+  @if $at-index != false {
+    @for $i from ($at-index + 1) through length($direction) {
+      $webkit-direction: append($webkit-direction, nth($direction, $i));
+    }
+    $webkit-direction: append($webkit-direction, unquote(','));
+    @for $i from 1 through ($at-index - 1) {
+      $webkit-direction: append($webkit-direction, nth($direction, $i));
+    }
+  } @else {
+    $webkit-direction: append($webkit-direction, $direction);
+  }
+
+  // background-image: -webkit-radial-gradient($webkit-direction, $colors);
+  background-image: radial-gradient($direction, $colors);
+}
+
+//   Animation
+// -------------------------------------------- \\
+
+/// A default transition style including hover and active psuedo elements. 
+/// @param  {[type]} $duration The length of the animation on hover, on blur the transition runs half of the given duration.
+/// @group Colour, Shape &amp; Effects
+@mixin transition($duration) {
+  transition: ($duration / 2) ease-out;
+
+  &:hover {
+    transition: $duration ease-in;
+  }
+
+  &:active {
+    transition-duration: 0ms;
+  }
+}
+
+//   Positioning
+// -------------------------------------------- \\
+
+// TODO: make all of these the one mixin
+
+/// A utility mixin to position the element and center it's datum reference point.
+/// @param  {[type]} $x-coord [description]
+/// @param  {[type]} $y-coord [description]
+@mixin pos($x-coord, $y-coord) {
+
+  @if $x-coord == null {
+    top: $y-coord;
+    transform: translateY(-$y-coord);
+  } @else if $y-coord == null {
+    left: $x-coord;
+    transform: translateX(-$x-coord);
+  }@else if $x-coord and $y-coord {
+    top: $y-coord;
+    left: $x-coord;
+    transform: translateX(-$x-coord) translateY(-$y-coord);
+  }
+
+}
+
+/// Positions an element in the center of its controlling parent. These items must also have display:absolute.
+@mixin pos-center {
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/// Positions an element vertically center of its controlling parent. These items must also have display:absolute
+@mixin pos-v-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/// Positions an element horizontally center of its controlling parent. These items must also have display:absolute
+@mixin pos-h-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+//   Lists
+// -------------------------------------------- \\
+/// Remove all styling for lists and their items.
+@mixin remove-list-style {
+  margin: 0; 
+  padding: 0;
+
+  li {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+  } 
+}
+
+/// Base styles for an inline or block menu list
+/// @param  {[type]} $inline-or-block Inline menus render horizontally. Block menus render vertically. 
+@mixin menu-list ($inline-or-block) {
+  @include remove-list-style;
+  // INLINE LISTS
+  @if ($inline-or-block == inline) { 
+    line-height: 1;
+    li {display: inline-block;}
+  }
+  // BLOCK LISTS
+  @if ($inline-or-block != inline) {
+    //child lists 
+    & ul {
+      @include remove-list-style;
+    }
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+  }
+}
+
+//   Utils
+// -------------------------------------------- \\
+// Good ol' clear-fix to the rescue.
+@mixin clear-fix {
+  
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    clear: both;
+  }
+}
+
+/// Truncate text at the given width and add an ellipsis to the end.
+/// @param  {px|%} $truncation-boundary The height of the truncation boundary.
+@mixin truncate($truncation-boundary) {
+  max-height: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/// Target retina devices.
+/// @group Responsive
+@mixin retina {
+  // TODO: review the below vendor prefixes
+  // sass-lint:disable no-vendor-prefixes
+  @media print,
+  (-webkit-min-device-pixel-ratio: 1.25),
+    (-o-min-device-pixel-ratio: 5 / 4),
+    (min-resolution: 120dpi) {
+      @content;
+    }
+  // sass-lint:enable no-vendor-prefixes
+}
+
+/// Hides an item with accessible techniques.
+@mixin accessible-hide {
+  position: absolute;
+  border: 0 none;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 0;
+}
+
+//  MISC
+// -------------------------------------------- \\
+
+/// Creates a dotted background fill
+/// @group Colour, Shape &amp; Effects
+@mixin bg-dotted {
+  // CSS dotted background
+  background-image:
+  linear-gradient(45deg, rgba(255, 255, 255, .05) 5%, transparent 5%), 
+  linear-gradient(-45deg, rgba(255, 255, 255, .05) 5%, transparent 5%),
+  linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, .05) 75%),
+  linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, .05) 75%);
+  background-size: 4px 4px;
+  background-position: 100px 100px, 250px 0, 250px -250px, 0 250px;
+}
+
+@mixin off-screen { 
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+} 
+
+@mixin base-link-style {
+  color: map-get($base, link-color);
+  text-decoration: none;
+  // sass-lint:disable no-transition-all
+  transition: all map-get($base, transition-time);
+  // sass-lint:enable no-transition-all
+
+  &:hover {
+    color: map-get($base, link-color--hover); //light
+  }
+}

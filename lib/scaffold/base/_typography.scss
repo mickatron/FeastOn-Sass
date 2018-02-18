@@ -1,0 +1,104 @@
+// Responsive Base font-size and line-height.
+// Use on html element.
+//  html {
+//    @extend %base-html-font-size;
+//  }
+
+$default-scale-size: index($scale-labels, delta) - 1;
+@if ($responsive-settings) {
+
+  @each $key, $value in $responsive-settings {
+    $base-size: map-get($value base-size);
+    $line-height: map-get($value, line-height);
+    $bp-value: map-get($value, breakpoint);
+
+    @include breakpoint($bp-value) {
+      // include a base values for html element
+      %base-html-font-size {
+        @if $base-size { 
+          font-size: $base-size;
+        }
+        @if $line-height {  
+          line-height: $line-height;
+        }
+      }
+    }
+  }
+}
+
+//  Typography
+// -------------------------------------------- \\
+html {
+  @extend %base-html-font-size;
+  color: map-get($base, type-color);
+  // sass-lint:disable no-vendor-prefixes
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // sass-lint:enable no-vendor-prefixes
+}
+
+html, 
+button {
+  font-family: map-get($base, font-family);
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+  font-weight: 400;
+
+  &:hover {
+    cursor: default;
+  }
+
+  &,
+  & a {
+    color: map-get($base, heading-color); //light
+    //font-weight: 300;
+   }
+}
+
+p {
+  margin: $spacing-delta 0;
+
+  &:hover {
+    cursor: default;
+  }
+}
+
+ul {
+  li {
+    padding-bottom: modular-rhythm(-1, default, $spacing-scales);
+
+    &:last-child {
+      padding-bottom: 0;
+    } 
+  }
+}
+
+a {
+  @include base-link-style;
+}
+
+strong, 
+b {
+  font-weight: 700;
+}
+
+hr {
+  margin: $spacing-gamma 0;
+  border: 1px solid get-color(grey); 
+  border-bottom: 0;
+}
+
+code {
+  display: inline-block;
+  background: get-color(grey, null, light, map-get($base, shade));
+  border-radius: map-get($base, border-radius);
+  padding: 0 $spacing-milli;
+  
+  a { text-decoration: none; }
+}
