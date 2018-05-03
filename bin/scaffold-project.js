@@ -9,7 +9,7 @@ if (!destination) {
   console.log('FeastOn.SASS: copy-scaffold operation failed. Please provide a destination folder with the -f option.');
 } else {
   console.log('FeastOn.SASS: Copying scaffold to destination folder ', destination);
-  ncp('lib/scaffold', destination, (err) => {
+  ncp('node_modules/feast-on-sass/lib/scaffold', destination, (err) => {
     if (err) {
       return console.error(err);
     }

@@ -20,7 +20,7 @@ $spacing-kilo:    modular-rhythm(4, default, $spacing-scales, $_default-spacing-
 $spacing-alpha:   modular-rhythm(3, default, $spacing-scales, $_default-spacing-size);
 $spacing-beta:    modular-rhythm(2, default, $spacing-scales, $_default-spacing-size);
 $spacing-gamma:   modular-rhythm(1, default, $spacing-scales, $_default-spacing-size);
-$spacing-delta:   px-to-rem($default-spacing-size, $_base-font-size) ;
+$spacing-delta:   px-to-rem($_default-spacing-size, $_base-font-size) ;
 $spacing-epsilon: modular-rhythm(-1, default, $spacing-scales, $_default-spacing-size);
 $spacing-zeta:    modular-rhythm(-2, default, $spacing-scales, $_default-spacing-size);
 $spacing-milli:   modular-rhythm(-3, default, $spacing-scales, $_default-spacing-size);

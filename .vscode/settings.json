@@ -1,11 +1,16 @@
 {
   "cSpell.words": [
-    "gutil",
     "Prerelease",
-    "sassdoc"
+    "cambria",
+    "falsey",
+    "freesans",
+    "giga",
+    "gutil",
+    "milli",
+    "sassdoc",
+    "segoe",
+    "truthy"
   ],
-  "window.zoomLevel": -2,
-  "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\cmd.exe",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "files.exclude": {

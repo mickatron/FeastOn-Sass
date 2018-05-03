@@ -10,12 +10,13 @@ FeastOn-SASS is a small **BETA** SASS library/framework. The project aims to pro
 
 ## Installation  
 Install with `npm` or `yarn`.
+
   `npm i FeastOn-SASS`
 
 ## Getting Started 
 Running the below command will copy all customizable style sheets to a folder of your choosing. 
 
-  `FeastOnSass -f /destination/folder`
+  `>npx feast-on-sass -f destination/folder`
 
 After the copy operation you can import the `_lib.scss` and `_base.scss` files found in your destination folder to your site or applications style sheets. 
 
@@ -30,7 +31,7 @@ The docs provided were created with `sassdoc`. They're incomplete at the moment,
 To come.
 
 ## Naming Conventions
-ish.sass uses both BEM (block__element--modifier), and Hungarian Notation.
+ish.sass uses both hyphenated BEM (block__element--modifier), and Hungarian Notation.
 
 ### Hungarian Notation Reference:
 - d- device
